@@ -1,92 +1,55 @@
-<!doctype html>
-<html>
-    <head>
-        <!-- <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script> -->
-        <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script> -->
-        <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.3.0/dist/aframe-master.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-       
-        <style>
-          .arjs-loader {
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-        
-          .arjs-loader div {
-            text-align: center;
-            font-size: 1.25em;
-            color: white;
-          }
-        </style>
-        
-        <script>
-            
-            AFRAME.registerComponent('videohandler1', {
-                init: function () {
-                    var marker = this.el;
-                    this.vid = document.querySelector("#vid1");
+<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.3.0/dist/aframe-master.min.js"></script>
 
-                    marker.addEventListener('markerFound', function () {
-                        this.toggle = true;
-                        this.vid.play();
-                    }.bind(this));
+<style>
+  .arjs-loader {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-                    marker.addEventListener('markerLost', function () {
-                        this.toggle = false;
-                        this.vid.pause();
-                    }.bind(this));
-                },
-            });
-            AFRAME.registerComponent('videohandler2', {
-                init: function () {
-                    var marker = this.el;
-                    this.vid = document.querySelector("#vid2");
+  .arjs-loader div {
+    text-align: center;
+    font-size: 1.25em;
+    color: white;
+  }
+</style>
 
-                    marker.addEventListener('markerFound', function () {
-                        this.toggle = true;
-                        this.vid.play();
-                    }.bind(this));
+<script>
+    AFRAME.registerComponent('videohandler1', {
+        init: function () {
+            var marker = this.el;
+            this.vid = document.querySelector("#vid1");
 
-                    marker.addEventListener('markerLost', function () {
-                        this.toggle = false;
-                        this.vid.pause();
-                    }.bind(this));
-                },
-            });
-        </script>
-    </head>
+            marker.addEventListener('markerFound', function () {
+                this.toggle = true;
+                this.vid.play();
+            }.bind(this));
 
-    <body style="margin: 0; overflow: hidden;">
+            marker.addEventListener('markerLost', function () {
+                this.toggle = false;
+                this.vid.pause();
+            }.bind(this));
+        },
+    });
 
-      <div class="arjs-loader">
-        <div>Loading, please wait...</div>
-      </div>
-        
-        <!--
-        <a-scene
-            vr-mode-ui="enabled: false"
-            loading-screen="enabled: false;"
-            arjs='sourceType: webcam; debugUIEnabled: false;'
-            id="scene"
-            embedded
-            gesture-detector
-        >
-        -->
-        <a-scene
-            vr-mode-ui='enabled: false;'
-            renderer="logarithmicDepthBuffer: true; precision: medium;"
-            embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: true;'>
-            
+    <script>
+
+<!-- rawgithack development URL -->
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+
+<body style='margin : 0px; overflow: hidden;'>
+   <!-- minimal loader shown until image descriptors are loaded -->
+  <div class="arjs-loader">
+    <div>Loading, please wait...</div>
+  </div>
+
             <a-assets>
                 <video
                     id="vid1"
@@ -100,70 +63,24 @@
                     muted
                     playsinline
                 ></video>
+                </a-assets>
+    
+    <a-scene
+        vr-mode-ui='enabled: false;'
+        renderer="logarithmicDepthBuffer: true; precision: medium;"
+        embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'>
 
-                <video
-                    id="vid2"
-                    src="assets/simple_spiral_loop_v4d.mp4"
-                    preload="auto"
-                    response-type="arraybuffer"
-                    loop
-                    crossorigin
-                    webkit-playsinline
-                    autoplay
-                    muted
-                    playsinline
-                ></video>
-                
-            </a-assets>
-
-            <!-- a-nft is the anchor that defines an Image Tracking entity -->
-            <!-- on 'url' use the path to the Image Descriptors created before. -->
-            <!-- the path should end with the name without the extension e.g. if file is 'pinball.fset' the path should end with 'pinball' -->
-            <a-nft
-              type="nft"
-              url="trex/trex"
-              smooth="true"
-              smoothCount="10"
-              smoothTolerance=".01"
-              smoothThreshold="5"
-            >
+        <!-- use rawgithack to retrieve the correct url for nft marker (see 'trex' below) -->
+        <a-nft
+            type='nft' url='trex/trex'
+            smooth='true' smoothCount='10' smoothTolerance='0.01' smoothThreshold='5'>
                 <a-video
                     src="#vid1"
                     scale="3.5 3.5 1."
                     position="1.0 2.0 0"
                     rotation="-90 0 0"
-                    class="clickable"
-                    gesture-handler
                 ></a-video>
-                
-             </a-nft>
-            
-
-            <a-marker
-                type="pattern"
-                preset="custom"
-                url="assets/marker_2.patt"
-                videohandler2
-                smooth="true"
-                smoothCount="100"
-                smoothTolerance="0.01"
-                smoothThreshold="5"
-                raycaster="objects: .clickable"
-                emitevents="true"
-                cursor="fuse: false; rayOrigin: mouse;"
-                id="markerB"
-            >
-                <a-video
-                    src="#vid2"
-                    scale="3. 3. 1."
-                    position="1.0 1.0 0"
-                    rotation="-90 0 0"
-                    class="clickable"
-                    gesture-handler
-                ></a-video>
-            </a-marker>
-
-            <a-entity camera></a-entity>
-        </a-scene>
-    </body>
-</html>
+        </a-nft>
+		<a-entity camera></a-entity>
+    </a-scene>
+</body>
