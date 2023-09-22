@@ -45,7 +45,7 @@
         <a-scene
             vr-mode-ui="enabled: false"
             loading-screen="enabled: false;"
-            arjs='sourceType: webcam; debugUIEnabled: false;'
+            arjs='sourceType: webcam; debugUIEnabled: false; patternRatio: 0.75'
             id="scene"
             embedded
             gesture-detector
@@ -82,7 +82,7 @@
             <a-marker
                 type="pattern"
                 preset="custom"
-                url="assets/marker_1.patt"
+                url="assets/pattern-marker_base_1.patt"
                 videohandler1
                 smooth="true"
                 smoothCount="1000"
