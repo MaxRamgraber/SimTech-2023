@@ -82,7 +82,7 @@
             <a-marker
                 type="pattern"
                 preset="custom"
-                url="assets/pattern-marker_base_1.patt"
+                url="assets/pattern-marker_base_spiral_blue.patt"
                 videohandler1
                 smooth="true"
                 smoothCount="100"
@@ -106,7 +106,31 @@
             <a-marker
                 type="pattern"
                 preset="custom"
-                url="assets/marker_2.patt"
+                url="assets/pattern-marker_base_triangle_blue.patt"
+                videohandler2
+                smooth="true"
+                smoothCount="100"
+                smoothTolerance="0.01"
+                smoothThreshold="5"
+                raycaster="objects: .clickable"
+                emitevents="true"
+                cursor="fuse: false; rayOrigin: mouse;"
+                id="markerB"
+            >
+                <a-video
+                    src="#vid2"
+                    scale="3. 3. 1."
+                    position="1.0 1.0 0"
+                    rotation="-90 0 0"
+                    class="clickable"
+                    gesture-handler
+                ></a-video>
+            </a-marker>
+
+            <a-marker
+                type="pattern"
+                preset="custom"
+                url="assets/pattern-marker_base_lorenz_blue.patt"
                 videohandler2
                 smooth="true"
                 smoothCount="100"
