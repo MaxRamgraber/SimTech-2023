@@ -26,18 +26,15 @@
                 init: function () {
                     var marker = this.el;
                     this.vid = document.querySelector("#vid2");
-                    this.vid_alt = document.querySelector("#vid3");
 
                     marker.addEventListener('markerFound', function () {
                         this.toggle = true;
                         this.vid.play();
-                        this.vid_alt.play();
                     }.bind(this));
 
                     marker.addEventListener('markerLost', function () {
                         this.toggle = false;
                         this.vid.pause();
-                        this.vid_alt.pause();
                     }.bind(this));
                 },
             });
@@ -166,15 +163,6 @@
                     src="#vid2"
                     scale="1. 1. 1."
                     position="-1.0 3.0 0"
-                    rotation="-90 0 0"
-                    class="clickable"
-                    gesture-handler
-                ></a-video>
-
-                <a-video
-                    src="#vid3"
-                    scale="1. 1. 1."
-                    position="-1.0 -3.0 0"
                     rotation="-90 0 0"
                     class="clickable"
                     gesture-handler
